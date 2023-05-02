@@ -3,6 +3,7 @@
   outline: none;
   font-family: var(--ff);
   font-weight: var(--fw-normal);
+  font-size: var(--fs);
   box-sizing: border-box;
 }
 
@@ -10,8 +11,9 @@
   --ff: 'Open Sans', sans-serif;
 
   --fs: 14px;
-  --fs-middle: 12px;
-  --fs-small: 10px;
+  --fs-middle: 0.85rem;
+  --fs-small: 0.71rem;
+  --fs-big: 2.57rem;
 
   --fw-bold: 600;
   --fw-normal: 400;
@@ -19,9 +21,11 @@
   --color-main: #000;
   --color-light: #adadad;
   --color-border: #ececec;
+  --color-danger: #ef4f44;
 
   --bg-color-accent: #fbfbfa;
   --bg-color-active: #eee;
+  --bg-color-danger: #ffe2dd;
 
   --sidebar-w: 250px;
 }
@@ -32,8 +36,6 @@
   display: flex;
   flex-direction: row;
   gap: 0;
-
-  font-size: var(--fs);
 }
 
 .sidebar-wrapper {
@@ -78,6 +80,10 @@
 }
 
 .note-preview {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+
   border-top:1px solid var(--color-border);
   padding: 15px;
   padding-inline: 20px;
@@ -102,5 +108,82 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.note-preview__date {
+  font-size: var(--fs-small);
+  line-height: 1em;
+  color: var(--color-light);
+}
+
+.main-menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px;
+  padding-inline: 20px;
+}
+
+.main-menu__left {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 5px;
+}
+
+.main-menu__right {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 5px;
+}
+
+.main-menu__title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  border: none;
+  background-color: var(--bg-color-active);
+  color: var(--color-light);
+  font-variation-settings: 'wght' 200;
+}
+
+.button_danger {
+  background-color: var(--bg-color-danger);
+  color: var(--color-danger);
+}
+
+.title {
+  font-size: var(--fs);
+  font-weight: var(--fw-bold);
+  color: var(--color-light);
+}
+
+.note {
+  width: min(100% - 40px, 600px);
+  margin-inline: auto;
+  margin-top: 48px;
+}
+
+.note__title {
+  font-size: var(--fs-big);
+  font-weight: var(--fw-bold);
+  line-height: 3rem;
+  margin-bottom: 24px;
+}
+
+.note__content {
+  font-size: var(--fs);
+  font-weight: var(--fw-normal);
+  line-height: 1.71rem;
 }
 
