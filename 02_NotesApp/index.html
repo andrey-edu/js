@@ -15,9 +15,9 @@
   <!-- LINKS TO CSS -->
   <link rel="stylesheet" href="css/style.css">
 </head>
-<body class="page">
+<body class="page" id="page">
 
-  <div class="sidebar-wrapper">
+  <div class="sidebar-wrapper" id="sidebar-wrapper">
     <div class="sidebar">
       <div class="search-form">
         <input type="search" name="" id="" class="search-form__input" placeholder="Search">
@@ -41,7 +41,7 @@
   <div class="content-wrapper">
     <div class="main-menu">
       <div class="main-menu__left">
-        <button class="button">
+        <button class="button" id="menu-btn">
           <span class="material-symbols-outlined">
             menu
           </span>
@@ -61,7 +61,7 @@
             arrow_forward_ios
           </span>
         </button>
-        <button class="button">
+        <button class="button" id="theme-btn">
           <span class="material-symbols-outlined">
             brightness_4
           </span>
@@ -73,11 +73,13 @@
         </button>
       </div>
     </div>
-    <div class="note">
-      <h1 class="note__title" contenteditable="true">Title</h1>
-      <div class="note__content" contenteditable="true">Hello</div>
+    <div class="note-wrapper">
+      <div class="note">
+        <h1 class="note__title" contenteditable="true">Title</h1>
+        <div class="note__content" contenteditable="true">Hello</div>
+      </div>
     </div>
   </div>
-
+  <script src="js/script.js"></script>
 </body>
 </html>
