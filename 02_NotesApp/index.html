@@ -91,7 +91,7 @@
   <div class="content-wrapper">
     <div class="main-menu">
       <div class="main-menu__left">
-        <button class="button" id="menu-btn">
+        <button class="button button_active" id="menu-btn">
           <span class="material-symbols-outlined">
             menu
           </span>
@@ -106,21 +106,23 @@
             add_box
           </span>
         </button>
-        <button class="button">
+        <button class="button submenu-btn" id="submenu-btn">
           <span class="material-symbols-outlined">
             arrow_forward_ios
           </span>
         </button>
-        <button class="button" id="theme-btn">
-          <span class="material-symbols-outlined">
-            brightness_4
-          </span>
-        </button>
-        <button class="button button_danger">
-          <span class="material-symbols-outlined">
-            delete
-          </span>
-        </button>
+        <div class="main-menu__submenu" id="submenu">
+          <button class="button" id="theme-btn">
+            <span class="material-symbols-outlined">
+              brightness_4
+            </span>
+          </button>
+          <button class="button button_danger">
+            <span class="material-symbols-outlined">
+              delete
+            </span>
+          </button>
+        </div>
       </div>
     </div>
     <div class="note-wrapper">

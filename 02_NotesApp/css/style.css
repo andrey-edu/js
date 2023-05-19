@@ -212,6 +212,22 @@
   gap: 5px;
 }
 
+.main-menu__submenu {
+  display: flex;
+  visibility: hidden;
+  gap: 5px;
+  justify-content: center;
+  width: 0;
+  transition: width var(--tran-1);
+  overflow: hidden;
+}
+
+.main-menu__submenu_visible {
+  /* display: flex; */
+  visibility: visible;
+  width: 100%;
+}
+
 .button {
   display: flex;
   align-items: center;
@@ -226,17 +242,30 @@
   transition: background-color var(--tran-1);
 }
 
+.button:hover {
+  background-color: var(--bg-color-active);
+}
+
+.button_active {
+  background-color: var(--bg-color-active);
+}
+
 .button_danger {
   background-color: var(--bg-color-main);
   color: var(--color-danger);
 }
 
-.button:hover {
-  background-color: var(--bg-color-active);
-}
-
 .button_danger:hover {
   background-color: var(--bg-color-danger);
+}
+
+.submenu-btn {
+  transform: rotate(180deg);
+}
+
+.submenu-btn_active {
+  transform: rotate(0deg);
+  transition: transform var(--tran-2);
 }
 
 .title {

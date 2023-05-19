@@ -2,17 +2,14 @@
 window.addEventListener("load", main);
 
 function main() {
-  function setSizes() {
-    console.log(screen.width, screen.height);
-    page.style.width = screen.width + "px";
-    page.style.height = screen.height + "px";
-  }
 
   const themeBtn = document.getElementById("theme-btn");
   const page = document.getElementById("page");
   const sidebar = document.getElementById("sidebar-wrapper");
   const menuBtn = document.getElementById("menu-btn");
-  body = document.getElementsByTagName("body")[0];
+  const subMenuBtn = document.getElementById("submenu-btn");
+  const subMenu = document.getElementById("submenu");
+
 
   themeBtn.addEventListener("click", ()=>{
     page.classList.toggle('page_dark');
@@ -20,9 +17,13 @@ function main() {
 
   menuBtn.addEventListener("click", ()=>{
     sidebar.classList.toggle('sidebar-wrapper_hidden');
+    menuBtn.classList.toggle('button_active');
   });
 
-  // setSizes();
+  subMenuBtn.addEventListener("click", ()=>{
+    subMenu.classList.toggle("main-menu__submenu_visible");
+    subMenuBtn.classList.toggle("button_active");
+    subMenuBtn.classList.toggle("submenu-btn_active");
+  });
 
-  // window.addEventListener("resize", setSizes);
 }
