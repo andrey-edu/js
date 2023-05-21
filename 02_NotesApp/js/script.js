@@ -7,8 +7,9 @@ function main() {
   const page = document.getElementById("page");
   const sidebar = document.getElementById("sidebar-wrapper");
   const menuBtn = document.getElementById("menu-btn");
-  const subMenuBtn = document.getElementById("submenu-btn");
-  const subMenu = document.getElementById("submenu");
+  const subMenuBtn = document.getElementById("main-menu-additional-btn");
+  const subMenuBtnIcon = document.getElementById("main-menu-additional-btn-icon");
+  const subMenu = document.getElementById("main-menu-additional");
 
 
   themeBtn.addEventListener("click", ()=>{
@@ -21,9 +22,9 @@ function main() {
   });
 
   subMenuBtn.addEventListener("click", ()=>{
-    subMenu.classList.toggle("main-menu__submenu_visible");
+    subMenu.classList.toggle("main-menu-additional_visible");
     subMenuBtn.classList.toggle("button_active");
-    subMenuBtn.classList.toggle("submenu-btn_active");
+    subMenuBtnIcon.classList.toggle("main-menu-additional-btn-icon_active");
   });
 
 }
