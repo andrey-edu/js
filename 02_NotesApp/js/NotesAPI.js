@@ -57,7 +57,7 @@ export default class NotesAPI {
 
   deleteNote(id) {
     const noteIndex = this.findNoteIndex(id);
-    if (noteIndex) {
+    if (noteIndex || noteIndex == 0) {
       this.notes.splice(noteIndex, 1);
       this.saveNotes();
     }

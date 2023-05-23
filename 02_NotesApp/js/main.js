@@ -40,7 +40,7 @@ function main() {
     updated: new Date()
   }
 
-  console.log(notesData.deleteNote(50));
+  console.log(notesData.deleteNote(0));
 }
 
 
