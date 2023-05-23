@@ -305,6 +305,7 @@
   font-weight: var(--fw-normal);
   line-height: 1.71rem;
   color: var(--color-main);
+  border-radius: 10px;
 }
 
 .note__content:hover {
