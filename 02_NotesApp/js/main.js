@@ -1,3 +1,5 @@
+import NotesAPI from "./NotesAPI.js"
+
 
 window.addEventListener("load", main);
 
@@ -12,19 +14,33 @@ function main() {
   const subMenu = document.getElementById("main-menu-additional");
 
 
-  themeBtn.addEventListener("click", ()=>{
+  themeBtn.addEventListener("click", ()=> {
     page.classList.toggle('page_dark');
   });
 
-  menuBtn.addEventListener("click", ()=>{
+  menuBtn.addEventListener("click", ()=> {
     sidebar.classList.toggle('sidebar-wrapper_hidden');
     menuBtn.classList.toggle('button_active');
   });
 
-  subMenuBtn.addEventListener("click", ()=>{
+  subMenuBtn.addEventListener("click", ()=> {
     subMenu.classList.toggle("main-menu-additional_visible");
     subMenuBtn.classList.toggle("button_active");
     subMenuBtnIcon.classList.toggle("main-menu-additional-btn-icon_active");
   });
 
+
+  const notesData = new NotesAPI();
+  // notesData.createNote();
+
+  const someNote = {
+    id: 4,
+    title: "new title",
+    body: "new body",
+    updated: new Date()
+  }
+
+  console.log(notesData.deleteNote(50));
 }
+
+
