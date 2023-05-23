@@ -1,6 +1,7 @@
 export default class NotesUI {
 
   constructor(notesData, root, notesPreview) {
+
     this.notesData = notesData;
     this.root = root;
     this.notesPriveiw = notesPreview;

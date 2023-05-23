@@ -18,7 +18,6 @@ function main() {
 
   const notesData = new NotesAPI();
   const app = new NotesUI(notesData, page, notesPreview);
-  // notesData.createNote();
 
   themeBtn.addEventListener("click", ()=> {
     page.classList.toggle('page_dark');

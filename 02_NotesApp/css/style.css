@@ -279,7 +279,7 @@
 }
 
 .note {
-  width: min(100% - 40px, 600px);
+  width: min(100%, 600px);
   padding-top: 48px;
   margin-inline: auto;
   overflow: auto;
@@ -289,14 +289,25 @@
   font-size: var(--fs-big);
   font-weight: var(--fw-bold);
   line-height: 3rem;
+  padding: 20px;
   margin-bottom: 24px;
   color: var(--color-main);
+  border-radius: 10px;
+}
+
+.note__title:hover {
+  background-color: var(--bg-color-accent);
 }
 
 .note__content {
   font-size: var(--fs);
+  padding: 20px;
   font-weight: var(--fw-normal);
   line-height: 1.71rem;
   color: var(--color-main);
+}
+
+.note__content:hover {
+  background-color: var(--bg-color-accent);
 }
 
