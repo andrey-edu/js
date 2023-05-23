@@ -16,6 +16,14 @@ export default class NotesUI {
       this.createNote();
     });
 
+    this.noteTitle.addEventListener("input", () => {
+      this.updateNote();
+    });
+
+    this.noteContent.addEventListener("input", () => {
+      this.updateNote();
+    });
+
     this.showListNotes();
     this.updateActiveNote(this.activeNoteId);
   }
@@ -49,9 +57,18 @@ export default class NotesUI {
     this.initNote(createdNoteId);
   }
 
+  updateNote() {
+    const newNote = {
+      id: this.activeNoteId,
+      title: this.noteTitle.innerHTML,
+      body: this.noteContent.innerHTML,
+      updated: new Date()
+    }
+    this.notesData.updateNote(newNote);
+  }
+
   initNote(id) {
     const noteIndex = this.notesData.findNoteIndex(id);
-    // console.log(this.notesData.notes[noteIndex]);
     this.noteTitle.innerHTML = this.notesData.notes[noteIndex].title;
     this.noteContent.innerHTML = this.notesData.notes[noteIndex].body;
   }

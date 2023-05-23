@@ -51,7 +51,7 @@ export default class NotesAPI {
 
   updateNote(noteToUpdate) {
     const noteIndex = this.findNoteIndex(noteToUpdate.id);
-    if (noteIndex) {
+    if (noteIndex || noteIndex == 0) {
       this.notes[noteIndex] = noteToUpdate;
       this.saveNotes();
     }
