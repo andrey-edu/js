@@ -45,6 +45,8 @@ export default class NotesAPI {
 
     this.notes.push(newNote);
     this.saveNotes();
+
+    return this.lastId;
   }
 
   updateNote(noteToUpdate) {
