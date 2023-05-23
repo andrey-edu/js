@@ -1,9 +1,11 @@
 import NotesAPI from "./NotesAPI.js"
+import NotesUI from "./NotesUI.js"
 
 
 window.addEventListener("load", main);
 
 function main() {
+
 
   const themeBtn = document.getElementById("theme-btn");
   const page = document.getElementById("page");
@@ -12,7 +14,11 @@ function main() {
   const subMenuBtn = document.getElementById("main-menu-additional-btn");
   const subMenuBtnIcon = document.getElementById("main-menu-additional-btn-icon");
   const subMenu = document.getElementById("main-menu-additional");
+  const notesPreview = document.getElementById("notes-preview");
 
+  const notesData = new NotesAPI();
+  const app = new NotesUI(notesData, page, notesPreview);
+  // notesData.createNote();
 
   themeBtn.addEventListener("click", ()=> {
     page.classList.toggle('page_dark');
@@ -29,18 +35,6 @@ function main() {
     subMenuBtnIcon.classList.toggle("main-menu-additional-btn-icon_active");
   });
 
-
-  const notesData = new NotesAPI();
-  // notesData.createNote();
-
-  const someNote = {
-    id: 4,
-    title: "new title",
-    body: "new body",
-    updated: new Date()
-  }
-
-  console.log(notesData.deleteNote(0));
 }
 
 
