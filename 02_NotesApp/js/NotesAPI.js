@@ -4,23 +4,24 @@ export default class NotesAPI {
     searchStr = searchStr.toLowerCase();
     let notes = JSON.parse(localStorage.getItem("notesapp-notes")) || [];
 
-    if (searchStr != '') {
+    if (searchStr != "") {
       notes = notes.filter(note => {
         if (note.title.toLowerCase().search(searchStr) != -1 || note.body.toLowerCase().search(searchStr) != -1) {
-          return true
+          return true;
         }
         return false;
       });
     }
 
-    notes.sort((a,b) => {
-      return new Date(a.updated) > new Date(b.updated) ? -1:1;
+    notes.sort((a, b) => {
+      return a.updated > b.updated ? -1:1;
     });
+
     return notes;
   }
 
   getLastId() {
-    const lastId = parseInt(localStorage.getItem("notesapp-lastId")) || 0;
+    const lastId = JSON.parse(localStorage.getItem("notesapp-lastId")) || 0;
     return lastId;
   }
 
@@ -34,23 +35,14 @@ export default class NotesAPI {
     localStorage.setItem("notesapp-notes", JSON.stringify(notes));
   }
 
-  findNoteIndex(notes, id) {
-    for (let i=0; i<notes.length; i++) {
-      if (notes[i].id == id) {
-        return i;
-      }
-    }
-    return undefined;
-  }
-
   createNote() {
     const lastId = this.raiseLastId();
     const notes = this.getNotes();
 
     const newNote = {
       id: lastId,
-      title: "Title...",
-      body: "Your note is here...",
+      title: "Write title here...",
+      body: "Write note here",
       updated: new Date()
     }
 
@@ -60,9 +52,19 @@ export default class NotesAPI {
     return lastId;
   }
 
+  findNoteIndex(notes, id) {
+    for (let i=0; i<notes.length; i++) {
+      if (notes[i].id == id) {
+        return i;
+      }
+    }
+    return undefined;
+  }
+
   updateNote(noteToUpdate) {
     const notes = this.getNotes();
     const noteIndex = this.findNoteIndex(notes, noteToUpdate.id);
+
     if (noteIndex || noteIndex == 0) {
       notes[noteIndex] = noteToUpdate;
       this.saveNotes(notes);
@@ -71,11 +73,11 @@ export default class NotesAPI {
 
   deleteNote(id) {
     const notes = this.getNotes();
-    const noteIndex = this.findNoteIndex(id);
+    const noteIndex = this.findNoteIndex(notes, id);
+
     if (noteIndex || noteIndex == 0) {
       notes.splice(noteIndex, 1);
       this.saveNotes(notes);
     }
   }
-
 }

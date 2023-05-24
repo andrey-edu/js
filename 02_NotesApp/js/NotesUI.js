@@ -3,17 +3,15 @@ export default class NotesUI {
   constructor(notesData, root) {
 
     this.notesData = notesData;
-    this.activeNoteId = 1;
+    this.activeNoteId = this.notesData.getLastId() || 1;
     this.activeNote = {};
-    // this.notesSortBy = get
     this.root = root;
 
     this.notesPreview = this.root.querySelector("#notes-preview");
     this.addNoteBtn = this.root.querySelector("#add-note");
     this.noteTitle = this.root.querySelector("#note-title");
     this.noteContent = this.root.querySelector("#note-content");
-    this.searchForm = this.root.querySelector("#search-input");
-
+    this.searchInput = this.root.querySelector("#search-input");
 
     this.addNoteBtn.addEventListener("click", () => {
       this.createNote();
@@ -22,6 +20,7 @@ export default class NotesUI {
     this.noteTitle.addEventListener("input", (e) => {
       this.updateNote();
       if (e.inputType == "insertParagraph") {
+        e.preventDefault();
         this.noteContent.focus();
       }
     });
@@ -30,7 +29,7 @@ export default class NotesUI {
       this.updateNote();
     });
 
-    this.searchForm.addEventListener("input", () => {
+    this.searchInput.addEventListener("input", () => {
       this.initUI();
     });
 
@@ -41,32 +40,33 @@ export default class NotesUI {
   initUI() {
     this.renderListNotes();
     this.renderNote();
+    // console.log(this.activeNoteId)
   }
 
-  // ! norm
   initListNotesItem(id, title, body, updated) {
     let active = "";
     if (id == this.activeNoteId) {
       active = "note-preview_active";
     }
+
     const note =
       `<div class="note-preview ${active}" data-note-id=${id}>
         <h3 class="note-preview__title">${title}</h3>
         <p class="note-preview__text">${body}</p>
         <p class="note-preview__date">${updated}</p>
       </div>`;
+
     return note;
   }
 
-
-  // ! norm
   initListNotes() {
     let notesList = ``;
-    const searchStr = this.searchForm.value;
+    const searchStr = this.searchInput.value;
     let notes = this.notesData.getNotes(searchStr);
 
-    if (notes.length == 0) {
+    if (notes.length == 0 && searchStr == "") {
       this.notesData.createNote();
+      notes = this.notesData.getNotes();
     }
 
     notes.forEach(note => {
@@ -79,12 +79,9 @@ export default class NotesUI {
     return notesList;
   }
 
-  // ! norm
   renderListNotes() {
-    // Создаем html-код для списка заметок
     this.notesPreview.innerHTML = this.initListNotes();
 
-    // Вешаем обрабочик события click на все превью заметок
     const notesList = this.root.querySelectorAll(".note-preview");
     notesList.forEach(noteBtn => {
       noteBtn.addEventListener("click", () => {
@@ -93,14 +90,12 @@ export default class NotesUI {
     });
   }
 
-  // ! norm
   noteBtnClick(button) {
     this.activeNoteId = button.dataset.noteId;
     this.renderListNotes();
     this.renderNote();
   }
 
-  // ! norm
   renderNote() {
     this.noteTitle.innerHTML = this.activeNote.title;
     this.noteContent.innerHTML = this.activeNote.body;
@@ -109,6 +104,7 @@ export default class NotesUI {
   createNote() {
     const createdNoteId = this.notesData.createNote();
     this.activeNoteId = createdNoteId;
+    console.log(this.activeNoteId)
 
     this.renderListNotes();
     this.renderNote();
@@ -121,6 +117,7 @@ export default class NotesUI {
       body: this.noteContent.innerHTML,
       updated: new Date()
     }
+
     this.notesData.updateNote(newNote);
     this.renderListNotes();
   }
