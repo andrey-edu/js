@@ -1,32 +1,42 @@
 export default class NotesAPI {
 
-  constructor() {
-    this.notes = this.getAllNotes();
-    this.lastId = this.getLastId();
-  }
+  getNotes(searchStr="") {
+    searchStr = searchStr.toLowerCase();
+    let notes = JSON.parse(localStorage.getItem("notesapp-notes")) || [];
 
-  getAllNotes() {
-    const notes = JSON.parse( localStorage.getItem("notesapp-notes") ) || [];
+    if (searchStr != '') {
+      notes = notes.filter(note => {
+        if (note.title.toLowerCase().search(searchStr) != -1 || note.body.toLowerCase().search(searchStr) != -1) {
+          return true
+        }
+        return false;
+      });
+    }
+
+    notes.sort((a,b) => {
+      return new Date(a.updated) > new Date(b.updated) ? -1:1;
+    });
     return notes;
   }
 
   getLastId() {
-    const lastId = parseInt( localStorage.getItem("notesapp-lastId") ) || 0;
+    const lastId = parseInt(localStorage.getItem("notesapp-lastId")) || 0;
     return lastId;
   }
 
   raiseLastId() {
-    this.lastId += 1;
-    localStorage.setItem("notesapp-lastId", this.lastId);
+    const raisedId = this.getLastId() + 1;
+    localStorage.setItem("notesapp-lastId", raisedId);
+    return raisedId;
   }
 
-  saveNotes() {
-    localStorage.setItem("notesapp-notes", JSON.stringify(this.notes));
+  saveNotes(notes) {
+    localStorage.setItem("notesapp-notes", JSON.stringify(notes));
   }
 
-  findNoteIndex(id) {
-    for (let i=0; i<this.notes.length; i++) {
-      if (this.notes[i].id == id) {
+  findNoteIndex(notes, id) {
+    for (let i=0; i<notes.length; i++) {
+      if (notes[i].id == id) {
         return i;
       }
     }
@@ -34,34 +44,37 @@ export default class NotesAPI {
   }
 
   createNote() {
-    this.raiseLastId();
+    const lastId = this.raiseLastId();
+    const notes = this.getNotes();
 
     const newNote = {
-      id: this.lastId,
+      id: lastId,
       title: "Title...",
       body: "Your note is here...",
       updated: new Date()
     }
 
-    this.notes.push(newNote);
-    this.saveNotes();
+    notes.push(newNote);
+    this.saveNotes(notes);
 
-    return this.lastId;
+    return lastId;
   }
 
   updateNote(noteToUpdate) {
-    const noteIndex = this.findNoteIndex(noteToUpdate.id);
+    const notes = this.getNotes();
+    const noteIndex = this.findNoteIndex(notes, noteToUpdate.id);
     if (noteIndex || noteIndex == 0) {
-      this.notes[noteIndex] = noteToUpdate;
-      this.saveNotes();
+      notes[noteIndex] = noteToUpdate;
+      this.saveNotes(notes);
     }
   }
 
   deleteNote(id) {
+    const notes = this.getNotes();
     const noteIndex = this.findNoteIndex(id);
     if (noteIndex || noteIndex == 0) {
-      this.notes.splice(noteIndex, 1);
-      this.saveNotes();
+      notes.splice(noteIndex, 1);
+      this.saveNotes(notes);
     }
   }
 
